@@ -51,11 +51,18 @@ class Tree {
         }
     }
 
-    public void countLeapNode() {
+    public int countLeapNode(Node node) {
+        int count = 0;
 
+        if (node.getlNode() == null) { count++; }
+        else if (node.getrNode() == null) { count++; }
+        else {
+            countLeapNode(node.getlNode());
+            countLeapNode(node.getrNode());
+        }
+
+        return count;
     }
-
-    public void traversal() { }
 }
 
 
@@ -78,6 +85,6 @@ public class Main {
             tree.createNode(parentNodeNumber);
         }
 
-        tree.countLeapNode();
+        System.out.println(tree.countLeapNode(tree.root));
     }
 }
