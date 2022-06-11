@@ -42,22 +42,41 @@ class Tree {
     public void createNode(char data, char left, char right) {
         if (root == null) { //맨 처음 루트노드 생성 코드
             root = new Node(data);
-            if (left != '.') root.setLeftNode(new Node(left));
-            if (right != '.') root.setRightNode(new Node(right));
+            if (left == '.') {
+                root.setLeftNode(null);
+            } else {
+                root.setLeftNode(new Node(left));
+            }
+
+            if (right == '.') {
+                root.setRightNode(null);
+            } else {
+                root.setRightNode(new Node(right));
+            }
+
         } else {
             recursiveNode(root, data, left, right); //루트가 있다면 재귀 방식으로 해당 위치 이동
         }
     }
 
-    public void recursiveNode(Node root, char data, char left, char right) {
-        if (root.getData() == data) {
-            if (left != '.') root.setLeftNode(new Node(left));
-            if (right != '.') root.setRightNode(new Node(right));
-        } else if (root == null) { //말단일 경우 여기로 들어와서 return됨
+    public void recursiveNode(Node node, char data, char left, char right) {
+        if (node == null) { //말단일 경우 여기로 들어와서 return됨
             return;
+        } else if (node.getData() == data) {
+            if (left == '.') {
+                node.setLeftNode(null);
+            } else {
+                node.setLeftNode(new Node(left));
+            }
+
+            if (right == '.') {
+                node.setRightNode(null);
+            } else {
+                node.setRightNode(new Node(right));
+            }
         } else { //해당 위치로 이동할 때까지 재귀 호출
-            recursiveNode(root.getLeftNode(), data, left, right);
-            recursiveNode(root.getRightNode(), data, left, right);
+            recursiveNode(node.getLeftNode(), data, left, right);
+            recursiveNode(node.getRightNode(), data, left, right);
         }
     }
 
@@ -71,17 +90,17 @@ class Tree {
 
     public void inOrderTraversal(Node node) {
         if (node != null) {
-            System.out.print(node.getData());
             if (node.getLeftNode() != null) inOrderTraversal(node.getLeftNode());
+            System.out.print(node.getData());
             if (node.getRightNode() != null) inOrderTraversal(node.getRightNode());
         }
     }
 
     public void postOrderTraversal(Node node) {
         if (node != null) {
-            System.out.print(node.getData());
             if (node.getLeftNode() != null) postOrderTraversal(node.getLeftNode());
             if (node.getRightNode() != null) postOrderTraversal(node.getRightNode());
+            System.out.print(node.getData());
         }
     }
 }
