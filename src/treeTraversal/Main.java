@@ -1,5 +1,8 @@
 package treeTraversal;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
@@ -8,19 +11,28 @@ class Node {
     private Node leftNode;
     private Node rightNode;
 
-    char getData() {return this.data;}
-    Node getLeftNode() {return this.leftNode;}
-    Node getRightNode() {return this.rightNode;}
-    void setData(char data) {this.data = data;}
-    void setLeftNode(char leftNode) {new Node(leftNode);}
-    void setRightNode(char rightNode) {new Node(rightNode);}
+    char getData() {
+        return this.data;
+    }
 
-    Node(char data) {this.data = data;}
+    Node getLeftNode() {
+        return this.leftNode;
+    }
 
-    Node(char data, char leftNode, char rightNode) {
+    Node getRightNode() {
+        return this.rightNode;
+    }
+
+    void setLeftNode(Node node) {
+        this.leftNode = node;
+    }
+
+    void setRightNode(Node node) {
+        this.rightNode = node;
+    }
+
+    Node(char data) {
         this.data = data;
-        new Node(leftNode);
-        new Node(rightNode);
     }
 }
 
@@ -30,8 +42,8 @@ class Tree {
     public void createNode(char data, char left, char right) {
         if (root == null) { //맨 처음 루트노드 생성 코드
             root = new Node(data);
-            if (left != '.') root.setLeftNode(left);
-            if (right != '.') root.setRightNode(right);
+            if (left != '.') root.setLeftNode(new Node(left));
+            if (right != '.') root.setRightNode(new Node(right));
         } else {
             recursiveNode(root, data, left, right); //루트가 있다면 재귀 방식으로 해당 위치 이동
         }
@@ -39,8 +51,8 @@ class Tree {
 
     public void recursiveNode(Node root, char data, char left, char right) {
         if (root.getData() == data) {
-            if (left != '.') root.setLeftNode(left);
-            if (right != '.') root.setRightNode(right);
+            if (left != '.') root.setLeftNode(new Node(left));
+            if (right != '.') root.setRightNode(new Node(right));
         } else if (root == null) { //말단일 경우 여기로 들어와서 return됨
             return;
         } else { //해당 위치로 이동할 때까지 재귀 호출
@@ -75,18 +87,17 @@ class Tree {
 }
 
 public class Main {
-    public static Scanner scanner = new Scanner(System.in);
+    public static BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Tree tree = new Tree();
 
         System.out.print("생성할 노드 갯수를 입력하세요 > ");
-        int nodeCount = scanner.nextInt();
+        int nodeCount = Integer.parseInt(String.valueOf(bufferedReader.readLine()));
 
-        for(int i = 0; i < nodeCount; i++) {
+        for (int i = 0; i < nodeCount; i++) {
             System.out.print((i + 1) + "번째 노드 이름, 왼쪽 자식 노드, 오른쪽 자식 노드를 순서대로 입력하세요 > ");
-            scanner.nextLine(); //버퍼를 비워주는 역할
-            String str = scanner.nextLine();//.next()는 공백을 못 읽음
+            String str = bufferedReader.readLine();
 
             StringTokenizer st = new StringTokenizer(str, " ", false);
             char root = st.nextToken().charAt(0);
