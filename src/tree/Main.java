@@ -1,5 +1,8 @@
 package tree;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
@@ -31,10 +34,6 @@ class Node {
     public void setrNode(Node node) {
         this.rNode = node;
     }
-
-    public void setNodeNumber(int nodeNumber) {
-        this.nodeNumber = nodeNumber;
-    }
 }
 
 class Tree {
@@ -43,7 +42,7 @@ class Tree {
 
     public void createNode(int parentNodeNumber) {
         if (parentNodeNumber == -1) {
-            root.setNodeNumber(nodeNumber);
+            root = new Node(parentNodeNumber);
             nodeNumber++;
         } else {
             traversalNode(root, parentNodeNumber);
@@ -83,23 +82,28 @@ class Tree {
 
 
 public class Main {
-    public static Scanner scanner = new Scanner(System.in);
+    public static BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Tree tree = new Tree();
 
         System.out.print("노드 개수를 입력하세요 > ");
-        final int size = scanner.nextInt();
+        final int size = Integer.parseInt(String.valueOf(bufferedReader.readLine()));
 
         System.out.println("0번부터 " + (size - 1) + "번 노드의 부모를 입력하세요.");
-        scanner.nextLine(); //버퍼를 비워주는 역할?
-        String str = scanner.nextLine();
+        String str = bufferedReader.readLine();
         StringTokenizer stringTokenizer = new StringTokenizer(str);
 
-        while (stringTokenizer.hasMoreTokens()) {
+//        while (stringTokenizer.hasMoreTokens()) {
+//            int parentNodeNumber = Integer.parseInt(stringTokenizer.nextToken());
+//            tree.createNode(parentNodeNumber);
+//        }
+
+        for (int i = 0; i < size; i++) {
             int parentNodeNumber = Integer.parseInt(stringTokenizer.nextToken());
             tree.createNode(parentNodeNumber);
         }
+
 
         System.out.println(tree.countLeapNode(tree.root));
     }
