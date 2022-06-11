@@ -10,19 +10,26 @@ class Node {
     public int getData() {
         return data;
     }
+
     public Node getlNode() {
         return lNode;
     }
+
     public Node getrNode() {
         return rNode;
     }
-    public void setData(int data) {
+
+    public void setlNode(Node node) {
+        this.lNode = node;
+    }
+
+    public void setrNode(Node node) {
+        this.rNode = node;
+    }
+
+    Node(int data) {
         this.data = data;
     }
-    public void setlNode(int data) {new Node(data);}
-    public void setrNode(int data) {new Node(data);}
-
-    Node(int data) { this.data = data;}
 }
 
 class Tree {
@@ -33,31 +40,31 @@ class Tree {
             root = new Node(data);
             //root.lNode = null; root.rNode = null;
         } else {
-            goToSeat(root, data);
+            traversalNode(root, data);
         }
     }
 
-    public void goToSeat(Node node, int data) {
+    public void traversalNode(Node node, int data) {
         if (node.getData() > data) {
             if (node.getrNode() == null) {
-                node.setrNode(data);
+                node.setrNode(new Node(data));
             } else {
-                goToSeat(node.getrNode(), data);
+                traversalNode(node.getrNode(), data);
             }
         } else {
             if (node.getlNode() == null) {
-                node.setlNode(data);
+                node.setlNode(new Node(data));
             } else {
-                goToSeat(node.getlNode(), data);
+                traversalNode(node.getlNode(), data);
             }
         }
     }
 
-    public void postOrderTraversal(Node node){
+    public void postOrderTraversal(Node node) {
         if (node != null) {
-            System.out.println(node.getData());
             if (node.getlNode() != null) postOrderTraversal(node.getlNode());
             if (node.getrNode() != null) postOrderTraversal(node.getrNode());
+            System.out.println(node.getData());
         }
     }
 }

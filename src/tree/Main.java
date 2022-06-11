@@ -5,7 +5,6 @@ import java.util.StringTokenizer;
 
 class Node {
     private int nodeNumber;
-    private Node parentNode;
     private Node lNode;
     private Node rNode;
 
@@ -13,11 +12,26 @@ class Node {
         this.nodeNumber = nodeNumber;
     }
 
-    public int getNodeNumber() { return nodeNumber; }
-    public Node getlNode() { return lNode; }
-    public Node getrNode() {return rNode; }
-    public void setlNode(Node node) { this.lNode = node; }
-    public void setrNode(Node node) { this.rNode = node; }
+    public int getNodeNumber() {
+        return nodeNumber;
+    }
+
+    public Node getlNode() {
+        return lNode;
+    }
+
+    public Node getrNode() {
+        return rNode;
+    }
+
+    public void setlNode(Node node) {
+        this.lNode = node;
+    }
+
+    public void setrNode(Node node) {
+        this.rNode = node;
+    }
+
     public void setNodeNumber(int nodeNumber) {
         this.nodeNumber = nodeNumber;
     }
@@ -54,9 +68,11 @@ class Tree {
     public int countLeapNode(Node node) {
         int count = 0;
 
-        if (node.getlNode() == null) { count++; }
-        else if (node.getrNode() == null) { count++; }
-        else {
+        if (node.getlNode() == null) {
+            count++;
+        } else if (node.getrNode() == null) {
+            count++;
+        } else {
             countLeapNode(node.getlNode());
             countLeapNode(node.getrNode());
         }
