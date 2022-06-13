@@ -30,7 +30,7 @@ class Node {
         this.rNode = node;
     }
 
-    Node(int data) {
+    public Node(int data) {
         this.data = data;
         setlNode(null);
         setrNode(null);
@@ -40,7 +40,7 @@ class Node {
 class Tree {
     Node root;
 
-    public void createNode(int data) {
+    void createNode(int data) {
         if (root == null) {
             root = new Node(data);
             root.setlNode(null);
@@ -50,7 +50,7 @@ class Tree {
         }
     }
 
-    public void traversalNode(Node node, int data) {
+    void traversalNode(Node node, int data) {
         if (node.getData() < data) {
             if (node.getrNode() == null) {
                 node.setrNode(new Node(data));
@@ -66,7 +66,7 @@ class Tree {
         }
     }
 
-    public void postOrderTraversal(Node node) {
+    void postOrderTraversal(Node node) {
         if (node != null) {
             if (node.getlNode() != null) postOrderTraversal(node.getlNode());
             if (node.getrNode() != null) postOrderTraversal(node.getrNode());
@@ -76,22 +76,32 @@ class Tree {
 }
 
 public class Main {
-    final static int SIZE = 9;
     public static BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 
     public static void main(String[] args) throws IOException {
         Tree tree = new Tree();
 
-        System.out.println("전위 순회 방식으로 정렬한 노드들의 데이터를 입력합니다.");
-        for (int i = 0; i < SIZE; i++) {
-            int data = Integer.parseInt(bufferedReader.readLine());
+        //System.out.println("전위 순회 방식으로 정렬한 노드들의 데이터를 입력합니다.");
+        while (true) {
 
-            tree.createNode(data);
+            String data = bufferedReader.readLine();
+            if (!isNumber(data)) {
+                break;
+            }
+            int intData = Integer.parseInt(data);
+            tree.createNode(intData);
         }
-
-
         tree.postOrderTraversal(tree.root);
 
         bufferedReader.close();
+    }
+
+    public static boolean isNumber(String str) {
+        try {
+            int data = Integer.parseInt(str);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 }
