@@ -1,6 +1,9 @@
 package binarySearchTree;
 
-import java.util.Scanner;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 class Node {
     private int data;
@@ -29,6 +32,8 @@ class Node {
 
     Node(int data) {
         this.data = data;
+        setlNode(null);
+        setrNode(null);
     }
 }
 
@@ -38,14 +43,15 @@ class Tree {
     public void createNode(int data) {
         if (root == null) {
             root = new Node(data);
-            //root.lNode = null; root.rNode = null;
+            root.setlNode(null);
+            root.setrNode(null);
         } else {
             traversalNode(root, data);
         }
     }
 
     public void traversalNode(Node node, int data) {
-        if (node.getData() > data) {
+        if (node.getData() < data) {
             if (node.getrNode() == null) {
                 node.setrNode(new Node(data));
             } else {
@@ -71,22 +77,21 @@ class Tree {
 
 public class Main {
     final static int SIZE = 9;
-    public static Scanner scanner = new Scanner(System.in);
+    public static BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Tree tree = new Tree();
 
         System.out.println("전위 순회 방식으로 정렬한 노드들의 데이터를 입력합니다.");
-        try {
-            for (int i = 0; i < SIZE; i++) {
-                String data = scanner.next();
+        for (int i = 0; i < SIZE; i++) {
+            int data = Integer.parseInt(bufferedReader.readLine());
 
-                tree.createNode(Integer.parseInt(data));
-            }
-        } catch (NullPointerException e) {
-            System.err.println("NullPointerException 발생");
+            tree.createNode(data);
         }
 
+
         tree.postOrderTraversal(tree.root);
+
+        bufferedReader.close();
     }
 }
