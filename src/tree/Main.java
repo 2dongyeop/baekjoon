@@ -123,9 +123,13 @@ public class Main {
             //System.out.print("지울 노드의 번호를 입력하세요 > ");
             int deleteNodeNum = Integer.parseInt(bufferedReader.readLine());
 
-            tree.deleteNode(tree.root, deleteNodeNum);
+            if (deleteNodeNum >= 0 || deleteNodeNum < size) { //지울 노드의 번호가 노드 개수보다 많을 경우
+                tree.deleteNode(tree.root, deleteNodeNum);
 
-            System.out.println(tree.countLeapNode(tree.root));
+                System.out.println(tree.countLeapNode(tree.root));
+            } else {
+                System.err.println("ERROR - deleteNodeNum이 0보다 작거나 size보다 큼 ");
+            }
         } else {
             System.err.println("노드 개수 오류 - 0보다 크고 50보다 작거나 같아야 함");
         }
