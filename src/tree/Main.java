@@ -1,6 +1,8 @@
 package tree;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
 class Node {
@@ -10,6 +12,10 @@ class Node {
 
     Node(int nodeNumber) {
         this.nodeNumber = nodeNumber;
+    }
+
+    Node(int nodeNumber, Node lNode, Node rNode) {
+        this.nodeNumber = nodeNumber; this.lNode = lNode; this.rNode = rNode;
     }
 
     public int getNodeNumber() {
@@ -40,6 +46,7 @@ class Tree {
 
     public void createNode(int parentNodeNumber) {
         if (parentNodeNumber == -1) {
+            //if (root == null) {}
             //루트 노드는 미리 만들어놓았으니 생략
         } else {
             traversalNode(root, parentNodeNumber);
@@ -50,11 +57,11 @@ class Tree {
         if (node != null) {
             if (node.getNodeNumber() == parentNodeNumber) {
                 if (node.getlNode() == null) {
-                    int tempNumber = node.getNodeNumber() + 1;//왼쪽 자식 노드의 번호는 부모 노드 번호 + 1
-                    node.setlNode(new Node(tempNumber));
+                    int tempNumber = 2 * node.getNodeNumber() + 1;//왼쪽 자식 노드의 번호는 부모 노드 번호 + 1
+                    node.setlNode(new Node(tempNumber, null, null));
                 } else if (node.getrNode() == null) {
-                    int tempNumber = node.getNodeNumber() + 2; //오른쪽 자식 노드의 번호는 부모 노드 번호 +2
-                    node.setrNode(new Node(tempNumber));
+                    int tempNumber = 2 * node.getNodeNumber() + 2; //오른쪽 자식 노드의 번호는 부모 노드 번호 +2
+                    node.setrNode(new Node(tempNumber, null, null));
                 }
             } else {
                 traversalNode(node.getlNode(), parentNodeNumber);
@@ -66,15 +73,16 @@ class Tree {
     public void deleteNode(Node node, int deleteNodeNum) {
         if (node != null) {
             if (node.getNodeNumber() == deleteNodeNum) { //루트 노드를 지우는 경우
-                this.root = null;
+                root.setrNode(null); root.setlNode(null); this.root = null;
+                //leapNodeCount = 0;
             } else {
                 if (node.getlNode() != null && node.getlNode().getNodeNumber() == deleteNodeNum) {
                     node.setlNode(null);
                 } else if (node.getrNode() != null && node.getrNode().getNodeNumber() == deleteNodeNum) {
                     node.setrNode(null);
                 } else {
-                    deleteNode(node.getlNode(), deleteNodeNum);
-                    deleteNode(node.getrNode(), deleteNodeNum);
+                    if (node.getlNode() != null) deleteNode(node.getlNode(), deleteNodeNum);
+                    if (node.getrNode() != null) deleteNode(node.getrNode(), deleteNodeNum);
                 }
             }
         }
@@ -85,8 +93,8 @@ class Tree {
             if ((node.getlNode() == null) && (node.getrNode() == null)) {
                 leapNodeCount++;
             } else {
-                countLeapNode(node.getlNode());
-                countLeapNode(node.getrNode());
+                if (node.getlNode() != null) countLeapNode(node.getlNode());
+                if (node.getrNode() != null) countLeapNode(node.getrNode());
             }
         }
         return leapNodeCount;
@@ -100,7 +108,7 @@ public class Main {
         final Tree tree = new Tree();
 
         //System.out.print("노드 개수를 입력하세요 > ");
-        final int size = Integer.parseInt(String.valueOf(bufferedReader.readLine()));
+        final int size = Integer.parseInt(bufferedReader.readLine());
 
         if (size > 0 && size <= 50) {
             //System.out.println("0번부터 " + (size - 1) + "번 노드의 부모를 입력하세요.");
@@ -119,7 +127,7 @@ public class Main {
 
             System.out.println(tree.countLeapNode(tree.root));
         } else {
-            //System.err.println("노드 개수 오류 - 0보다 크고 50보다 작거나 같아야 함");
+            System.err.println("노드 개수 오류 - 0보다 크고 50보다 작거나 같아야 함");
         }
 
         bufferedReader.close();
