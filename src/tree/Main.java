@@ -7,17 +7,11 @@ import java.util.StringTokenizer;
 
 class Node {
     private int nodeNumber;
-    private Node lNode;
-    private Node rNode;
+    private Node lNode = null;
+    private Node rNode = null;
 
     Node(int nodeNumber) {
         this.nodeNumber = nodeNumber;
-    }
-
-    Node(int nodeNumber, Node lNode, Node rNode) {
-        this.nodeNumber = nodeNumber;
-        this.lNode = lNode;
-        this.rNode = rNode;
     }
 
     public Node getlNode() {
