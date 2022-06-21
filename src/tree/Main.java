@@ -42,10 +42,11 @@ class Node {
 class Tree {
     static int nodeNumber = 0;
     static int leapNodeCount = 0;
-    static Node root = new Node(0);
+    static Node root = new Node(nodeNumber); //루트 노드는 0번
 
     public void createNode(int parentNodeNumber) {
         if (parentNodeNumber == -1) {
+            //root = new Node(nodeNumber);
             System.out.println("루트(0번) 노드 생성");
         } else {
             traversalNode(root, parentNodeNumber);
@@ -57,10 +58,10 @@ class Tree {
             if (node.getNodeNumber() == parentNodeNumber) { //부모 번호가 노드의 번호와 일치하면
                 if (node.getlNode() == null) { //왼쪽 자식으로 생성
                     node.setlNode(new Node(++nodeNumber));
-                    System.out.println(nodeNumber +"번 노드 생성");
+                    System.out.println(nodeNumber + "번 노드 생성");
                 } else if (node.getrNode() == null) { //오른쪽 자식으로 생성
                     node.setrNode(new Node(++nodeNumber));
-                    System.out.println(nodeNumber +"번 노드 생성");
+                    System.out.println(nodeNumber + "번 노드 생성");
                 }
             } else {
                 if (node.getlNode() != null) traversalNode(node.getlNode(), parentNodeNumber);
@@ -82,7 +83,7 @@ class Tree {
 
     public void deleteChildNode(Node node) {
         if (node != null) {
-            //자식 노드들을 지움
+            //먼저 자식 노드들을 지우는 과정
             if (node.getlNode() != null) deleteChildNode(node.getlNode());
             if (node.getrNode() != null) deleteChildNode(node.getrNode());
 
@@ -96,7 +97,7 @@ class Tree {
     }
 
     public int countLeapNode(Node node) {
-        if (node != null && node.getNodeNumber() >= 0) { //node.getNodeNumber() >= -1
+        if (node != null && node.getNodeNumber() >= 0) {
             if ((node.getlNode() == null) && (node.getrNode() == null)) {
                 System.out.println(node.getNodeNumber() + "번이 리프 노드");
                 leapNodeCount++;
