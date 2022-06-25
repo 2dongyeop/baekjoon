@@ -44,7 +44,7 @@ class Tree {
     static int leapNodeCount = 0;
     static Node root = new Node(nodeNumber); //루트 노드는 0번
 
-    public void createNode(int parentNodeNumber) {
+    final void createNode(int parentNodeNumber) {
         if (parentNodeNumber == -1) {
             //root = new Node(nodeNumber);
             System.out.println("루트(0번) 노드 생성");
@@ -53,7 +53,7 @@ class Tree {
         }
     }
 
-    public void traversalNode(Node node, int parentNodeNumber) {
+    final void traversalNode(Node node, int parentNodeNumber) {
         if (node != null) {
             if (node.getNodeNumber() == parentNodeNumber) { //부모 번호가 노드의 번호와 일치하면
                 if (node.getlNode() == null) { //왼쪽 자식으로 생성
@@ -70,7 +70,7 @@ class Tree {
         }
     }
 
-    public void selectDeleteNode(Node node, int deleteNodeNum) {
+    final  void selectDeleteNode(Node node, int deleteNodeNum) {
         if (node != null) {
             if (node.getNodeNumber() == deleteNodeNum) {
                 deleteChildNode(node); //해당 노드와 자식들을 지움
@@ -81,7 +81,7 @@ class Tree {
         }
     }
 
-    public void deleteChildNode(Node node) {
+    final void deleteChildNode(Node node) {
         if (node != null) {
             //먼저 자식 노드들을 지우는 과정
             if (node.getlNode() != null) deleteChildNode(node.getlNode());
@@ -96,7 +96,7 @@ class Tree {
         }
     }
 
-    public int countLeapNode(Node node) {
+    final int countLeapNode(Node node) {
         if (node != null && node.getNodeNumber() >= 0) {
             if ((node.getlNode() == null) && (node.getrNode() == null)) {
                 System.out.println(node.getNodeNumber() + "번이 리프 노드");
@@ -111,9 +111,9 @@ class Tree {
 }
 
 public class Main {
-    public static BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+    public final static BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 
-    public static void main(String[] args) throws IOException {
+    public static void main(final String[] args) throws IOException {
         final Tree tree = new Tree();
 
         //System.out.print("노드 개수를 입력하세요 > ");
