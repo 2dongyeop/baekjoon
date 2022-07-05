@@ -15,26 +15,29 @@ public class Main {
         int N = Integer.parseInt(st.nextToken());
         int M = Integer.parseInt(st.nextToken());
 
-        int[] temp = new int[N + 1]; //1~N까지 쓸 예정이지만 배열은 0부터 시작이므로 N+1
+        int[] temp = new int[N + 1]; //1~N까지 쓸 예정이지만 배열은 0부터 시작이므로 크기가 N+1
+        boolean[] visit = new boolean[N + 1]; //방문 정보를 저장하는 배열
+
+        visit[0] = true;                     //배열 초기화
         for (int i = 0; i <= N; i++) {
             temp[i] = i;
         }
 
-        seriesNM(N, M, temp);
+        seriesNM(N, M, temp, visit);
     }
 
-    private static final void seriesNM(final int N, final int M, final int temp[]) throws IOException {
-        int i;
-        boolean[] visit = new boolean[N + 1];
+    private static final void seriesNM(final int N, final int M, final int temp[], final boolean visit[]) throws IOException {
+        
 
-        while (true) {
-            for (i = 1; i <= N; i++) {
-                bufferedWriter.write(i + "\n");
 
-                if (i == N) break; //for문 끝
-            }
-            bufferedWriter.flush();
-
-        }
+//        while (true) {
+//            for (int i = 1; i <= N; i++) {
+//                bufferedWriter.write(i + "\n");
+//
+//                if (i == N) break; //for문 끝
+//            }
+//            bufferedWriter.flush();
+//
+//        }
     }
 }
