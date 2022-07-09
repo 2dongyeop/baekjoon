@@ -27,7 +27,7 @@ public class Main {
         eCount = Integer.parseInt(st1.nextToken());
 
 //        System.out.println("시작 노드를 입력");
-        String startNodeNum = br.readLine();
+        start = Integer.parseInt(br.readLine());
 
         list = new ArrayList[vCount + 1]; //정점 인접 리스트
         distance = new int[vCount + 1]; //시작점과 다른 정점간의 최단경로
@@ -85,19 +85,20 @@ public class Main {
             }
         }
     }
+
+    private static class Node implements Comparable<Node> { //시간 단축으로 성능 개선
+        int vertex;
+        int weight;
+
+        Node(int vertex, int weight) {
+            this.vertex = vertex;
+            this.weight = weight;
+        }
+
+        @Override
+        public int compareTo(Node o) {
+            return weight - o.weight;
+        }
+    }
 }
 
-class Node implements Comparable<Node> { //시간 단축으로 성능 개선
-    int vertex;
-    int weight;
-
-    Node(int vertex, int weight) {
-        this.vertex = vertex;
-        this.weight = weight;
-    }
-
-    @Override
-    public int compareTo(Node o) {
-        return weight - o.weight;
-    }
-}
