@@ -1,7 +1,5 @@
 # baekjoon
-백준에서 풀어본 알고리즘 문제들을 기록합니다.
+[백준](https://www.acmicpc.net/)에서 풀어본 알고리즘 문제들을 기록합니다.
 
-모든 문제 풀이 코드는 github에 올리고 있으며,
-오류 해결 사항이나 메모는 개인 노션 페이지에 정리합니다.
-
-[개인 노션 링크](https://leedongyeop.notion.site/BaekJoon-1458379b4a7d445dbdeb92735edecfc3)
+- 각 하위 디렉토리들마다 README.md를 만들어 문제를 설명합니다.
+- 접근 방식 및 오류 해결 과정들을 기록한 [노션](https://leedongyeop.notion.site/BaekJoon-1458379b4a7d445dbdeb92735edecfc3)과 [블로그](https://velog.io/@dongvelop/series/%EC%BD%94%EB%94%A9%ED%85%8C%EC%8A%A4%ED%8A%B8)링크를 첨부하였습니다.
