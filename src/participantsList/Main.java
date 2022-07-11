@@ -18,8 +18,9 @@ public class Main {
         int N = Integer.parseInt(str[0]);
         int M = Integer.parseInt(str[1]);
 
-        boolean isEOF = false;
+        int[] school = new int[N + 1];
 
+        boolean isEOF = false;
         do {
 //            System.out.println("학급과 이름을 입력하세요");
             String[] input = br.readLine().split(" ");
@@ -27,12 +28,17 @@ public class Main {
             int classNumber = Integer.parseInt(input[0]);
             String name = input[1];
 
-            if (classNumber == 0 && name.equals("0")) isEOF = true;
+            if (classNumber == 0 && name.equals("0")) {
+                isEOF = true;
+                continue;  //break;
+            }
 
-            if (classNumber % 2 == 0) {
+            if (classNumber % 2 == 0 && school[classNumber] < M) {
                 even.add(new Participants(classNumber, name));
-            } else if (classNumber % 2 == 1) {
+                school[classNumber]++;
+            } else if (classNumber % 2 == 1 && school[classNumber] < M) {
                 odd.add(new Participants(classNumber, name));
+                school[classNumber]++;
             }
         } while (!isEOF);
 
@@ -44,6 +50,13 @@ public class Main {
     }
 
     private static void printList(ArrayList<Participants> list) {
+//        StringBuilder sb = new StringBuilder();
+//
+//        for (int i = 0; i < list.size(); i++) {
+//            sb.append(list.get(i).classNumber + " " + list.get(i).name + "\n");
+//        }
+//
+//        System.out.println(sb.toString());
         for (Participants p : list) {
             System.out.println(p.classNumber + " " + p.name);
         }
