@@ -50,29 +50,30 @@ public class Main {
     }
 
     private static void prim() {
-        boolean visited[] = new boolean[vCount + 1];
+        boolean visited[] = new boolean[vCount + 1]; //방문한 노드를 표시
 
         PriorityQueue<Node> pq = new PriorityQueue<>();
-        pq.add(new Node(1, 0));
+        pq.add(new Node(1, 0)); //시작 노드는 상관x
 
         long result = 0;
-        int count = 0;
+        int count = 0; //선택된 vertex의 개수를 저장
 
         while (!pq.isEmpty()) {
-            Node current = pq.poll();
+            Node current = pq.poll(); //우선순위 큐로 구현하여 최소 간선이 꺼내짐
 
             if (visited[current.linkedNodeNum]) {
-                continue;
+                continue;             //현재 vertex가 이미 방문한 상태이면 생략
             }
 
             visited[current.linkedNodeNum] = true;
             result += current.weight;
 
-            if (++count == vCount) {
+            if (++count == vCount) { //모든 vertex를 다 찾은 상태
                 System.out.println(result);
                 break;
             }
 
+            //해당 vertex와 연결된 모든 vertex를 큐에 넣음
             for (Node next : graph[current.linkedNodeNum]) {
                 pq.add(next);
             }
