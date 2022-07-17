@@ -26,6 +26,8 @@ public class Main {
 
             pq.add(new Edge(to, from, weight));
         }
+
+        kruskal();
     }
 
     private static void initialize() {
