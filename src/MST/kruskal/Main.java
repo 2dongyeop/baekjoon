@@ -26,7 +26,16 @@ public class Main {
 
             pq.add(new Edge(to, from, weight));
         }
+    }
 
+    private static void initialize() {
+        parent = new int[nodeCount + 1];
+        for (int i = 1; i < nodeCount + 1; i++) {
+            parent[i] = i;
+        }
+    }
+
+    private static void kruskal() {
         for (int i = 0; i < pq.size(); i++) {
             Edge edge = pq.poll();
 
@@ -39,13 +48,6 @@ public class Main {
             }
         }
         System.out.println(total);
-    }
-
-    private static void initialize() {
-        parent = new int[nodeCount + 1];
-        for (int i = 1; i < nodeCount + 1; i++) {
-            parent[i] = i;
-        }
     }
 
     public static int find(int x) {
